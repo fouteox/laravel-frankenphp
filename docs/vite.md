@@ -15,25 +15,25 @@ docker compose exec php npm install @vitejs/plugin-basic-ssl --save-dev
 ```js
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-+ import basicSsl from '@vitejs/plugin-basic-ssl'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
-+   server: {
-+       https: true,
-+       host: '0.0.0.0',
-+       hmr: {
-+           host: 'localhost',
-+       }
-+   },
+    server: {
+        https: true,
+        host: '0.0.0.0',
+        hmr: {
+            host: 'localhost',
+        }
+    }, 
     plugins: [
-+       basicSsl({
-+           /** name of certification */
-+           name: 'WhatYouWant',
-+           /** custom trust domains */
-+           domains: ['localhost'],
-+           /** custom certification directory (from the project root for example) */
-+           certDir: './cert'
-+       }),
+        basicSsl({
+            /** name of certification */
+            name: 'WhatYouWant',
+            /** custom trust domains */
+            domains: ['localhost'],
+            /** custom certification directory (from the project root for example) */
+            certDir: './cert'
+        }),
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
