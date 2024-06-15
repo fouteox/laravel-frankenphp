@@ -1,0 +1,13 @@
+# Production environment override
+services:
+  php:
+    build:
+      context: .
+      target: frankenphp_prod
+    volumes:
+      - storage_data:/app/storage
+      - cache_data:/app/bootstrap/cache
+
+volumes:
+  storage_data:
+  cache_data:
