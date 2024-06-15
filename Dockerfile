@@ -127,5 +127,4 @@ RUN set -eux; \
     --no-ansi \
     --no-dev; \
     composer clear-cache; \
-    php artisan storage:link; \
-    php artisan optimize; sync;
+    php artisan storage:link; sync;

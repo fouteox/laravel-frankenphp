@@ -4,10 +4,14 @@ services:
     build:
       context: .
       target: frankenphp_prod
+    environment:
+      APP_ENV: production
     volumes:
       - storage_data:/app/storage
       - cache_data:/app/bootstrap/cache
+      - database_data:/database
 
 volumes:
   storage_data:
   cache_data:
+  database_data:

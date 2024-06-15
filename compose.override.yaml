@@ -20,6 +20,7 @@ services:
       - host.docker.internal:host-gateway
     tty: true
     ports:
+      # VITE
       - target: 5173
         published: 5173
         protocol: tcp
