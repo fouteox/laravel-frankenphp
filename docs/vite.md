@@ -8,7 +8,7 @@ If you haven't already, start the project:
 
 Check that the laravel home page appears correctly: [https://localhost](https://localhost)
 
-Run
+Run:
     
     docker compose exec php npm install @vitejs/plugin-basic-ssl --save-dev
 
