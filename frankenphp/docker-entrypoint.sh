@@ -39,8 +39,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'artisan' ]; then
             php artisan optimize;
         fi
     fi
-
-    service cron start
 fi
 
 exec docker-php-entrypoint "$@"
