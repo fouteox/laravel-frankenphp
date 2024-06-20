@@ -46,4 +46,4 @@ Laravel Docker is available under the MIT License.
 
 ## Credits
 
-Original repository for [symfony](https://github.com/dunglas/symfony-docker) created by [Kévin Dunglas](https://dunglas.dev).
+Original repository for [Symfony](https://github.com/dunglas/symfony-docker) created by [Kévin Dunglas](https://dunglas.dev).
