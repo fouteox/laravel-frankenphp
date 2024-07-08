@@ -50,17 +50,10 @@ FROM frankenphp_base AS frankenphp_dev
 
 ENV APP_ENV=local XDEBUG_MODE=off
 
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh; \
-    bash nodesource_setup.sh; \
-    apt-get install -y nodejs; \
-    rm nodesource_setup.sh;
-
-RUN set -eux; \
-	install-php-extensions \
-		xdebug \
-	;
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" && \
+    install-php-extensions xdebug && \
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
+    apt-get install -y nodejs && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
@@ -108,23 +101,14 @@ RUN set -eux; \
 
 # copy sources
 COPY --link . ./
-RUN rm -Rf frankenphp/
 
 # copy build assets
 COPY --link --from=build /app/public ./public
 
-RUN set -eux; \
-    mkdir -p storage/framework/sessions; \
-    mkdir -p storage/framework/views; \
-    mkdir -p storage/framework/cache; \
-    mkdir -p storage/framework/testing; \
-    mkdir -p storage/logs; \
-    mkdir -p bootstrap/cache; \
-    chmod -R a+rw storage; \
-    composer install \
-    --classmap-authoritative \
-    --no-interaction \
-    --no-ansi \
-    --no-dev; \
-    composer clear-cache; \
-    php artisan storage:link; sync;
+RUN rm -Rf frankenphp/ && \
+    set -eux; \
+    mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/framework/testing storage/logs bootstrap/cache && \
+    chmod -R a+rw storage && \
+    composer dump-autoload --optimize --classmap-authoritative --no-interaction --no-ansi --no-dev && \
+    composer clear-cache && \
+    php artisan storage:link && sync
